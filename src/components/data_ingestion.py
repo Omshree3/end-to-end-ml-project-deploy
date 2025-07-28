@@ -5,7 +5,8 @@ from src.logger import logging ## to log messages
 from sklearn.model_selection import train_test_split ## to split the dataset into training and testing sets
 import pandas as pd
 from dataclasses import dataclass ## to create classes for data storage
-
+from src.components.data_transformation import DataTransformation ## to use the data transformation component
+from src.components.data_transformation import DataTransformationConfig ## to use the configuration for data transformation
 @dataclass
 class DataIngestionconfig:
     train_data_path:str =os.path.join('artifacts','train.csv')
@@ -43,7 +44,9 @@ class DataIngestion:
         
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion() ## running the data ingestion process
+    train_data,test_data=obj.initiate_data_ingestion() ## running the data ingestion process
     
-
+    data_transformation = DataTransformation() ## creating an instance of the DataTransformation class
+    data_transformation.initiate_data_transformation(train_data, test_data) ## initiating the data transformation process
+    
  
