@@ -55,3 +55,4 @@ if __name__ == "__main__":
     
     modeltrainer = ModelTrainer() ## creating an instance of the ModelTrainer class
     print(modeltrainer.initiate_model_trainer(train_arr,test_arr)) ## initiating the model training process
+    
