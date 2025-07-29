@@ -7,6 +7,10 @@ import pandas as pd
 from dataclasses import dataclass ## to create classes for data storage
 from src.components.data_transformation import DataTransformation ## to use the data transformation component
 from src.components.data_transformation import DataTransformationConfig ## to use the configuration for data transformation
+
+from src.components.model_trainer import ModelTrainerConfig ## to use the configuration for model training
+from src.components.model_trainer import ModelTrainer ## to use the model trainer component
+
 @dataclass
 class DataIngestionconfig:
     train_data_path:str =os.path.join('artifacts','train.csv')
@@ -47,6 +51,7 @@ if __name__ == "__main__":
     train_data,test_data=obj.initiate_data_ingestion() ## running the data ingestion process
     
     data_transformation = DataTransformation() ## creating an instance of the DataTransformation class
-    data_transformation.initiate_data_transformation(train_data, test_data) ## initiating the data transformation process
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data, test_data) ## initiating the data transformation process
     
- 
+    modeltrainer = ModelTrainer() ## creating an instance of the ModelTrainer class
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr)) ## initiating the model training process
